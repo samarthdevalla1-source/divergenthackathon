@@ -22,16 +22,8 @@ Return valid JSON only with this exact schema:
 }
 `;
 
-function json(status, body) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Methods": "POST, OPTIONS"
-    }
-  });
+function sendJson(response, status, body) {
+  response.status(status).json(body);
 }
 
 function normalizeStringArray(value) {
@@ -78,34 +70,34 @@ function parseOpenAIContent(content) {
   }
 }
 
-export async function OPTIONS() {
-  return json(200, { ok: true });
-}
+export default async function handler(request, response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 
-export default async function handler(request) {
   if (request.method === "OPTIONS") {
-    return OPTIONS();
+    return sendJson(response, 200, { ok: true });
   }
 
   if (request.method !== "POST") {
-    return json(405, { error: "Method not allowed." });
+    return sendJson(response, 405, { error: "Method not allowed." });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
-    return json(500, { error: "OPENAI_API_KEY is missing." });
+    return sendJson(response, 500, { error: "OPENAI_API_KEY is missing." });
   }
 
   try {
-    const body = await request.json();
+    const body = request.body && typeof request.body === "object" ? request.body : {};
     const notes = typeof body.notes === "string" ? body.notes.trim() : "";
 
     if (!notes) {
-      return json(400, { error: "Please paste doctor notes or visit instructions first." });
+      return sendJson(response, 400, { error: "Please paste doctor notes or visit instructions first." });
     }
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const openAIResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,20 +114,20 @@ export default async function handler(request) {
       })
     });
 
-    const payload = await response.json();
+    const payload = await openAIResponse.json();
 
-    if (!response.ok) {
+    if (!openAIResponse.ok) {
       const message =
         payload && typeof payload === "object" && payload.error && payload.error.message
           ? payload.error.message
           : "OpenAI request failed.";
-      return json(response.status, { error: message });
+      return sendJson(response, openAIResponse.status, { error: message });
     }
 
     const content = payload?.choices?.[0]?.message?.content || "";
-    return json(200, parseOpenAIContent(content));
+    return sendJson(response, 200, parseOpenAIContent(content));
   } catch (error) {
     console.error("AfterVisit simplify error:", error);
-    return json(500, { error: "Something went wrong while simplifying the instructions." });
+    return sendJson(response, 500, { error: "Something went wrong while simplifying the instructions." });
   }
 }
