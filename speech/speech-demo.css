@@ -1,0 +1,244 @@
+body.speech-demo-body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(91, 181, 255, 0.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(0, 191, 166, 0.2), transparent 35%),
+    linear-gradient(135deg, #f4fbff 0%, #f7fffd 48%, #eef6ff 100%);
+  color: #12313d;
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+
+.speech-demo-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 32px auto;
+}
+
+.speech-demo-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(18, 49, 61, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(26, 76, 91, 0.14);
+  padding: 28px;
+  backdrop-filter: blur(18px);
+}
+
+.speech-demo-header,
+.speech-grid,
+.controls-grid,
+.speech-actions-row,
+.panel-header,
+.status-stream,
+.range-row {
+  display: flex;
+}
+
+.speech-demo-header,
+.speech-grid,
+.controls-grid {
+  gap: 20px;
+}
+
+.speech-demo-header,
+.speech-actions-row,
+.range-row {
+  justify-content: space-between;
+}
+
+.speech-demo-header,
+.speech-actions-row,
+.panel-header,
+.range-row {
+  align-items: center;
+}
+
+.speech-demo-header {
+  margin-bottom: 20px;
+}
+
+.speech-demo-kicker {
+  margin: 0 0 8px;
+  color: #008c7d;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.speech-demo-header h1,
+.panel-header h2 {
+  margin: 0;
+}
+
+.speech-demo-header h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1;
+}
+
+.speech-demo-copy {
+  max-width: 620px;
+  margin: 12px 0 0;
+  color: #49636d;
+  line-height: 1.6;
+}
+
+.speech-status-cluster {
+  display: grid;
+  gap: 10px;
+}
+
+.status-chip,
+.support-notice,
+.message {
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+}
+
+.status-chip {
+  background: rgba(18, 49, 61, 0.06);
+  font-weight: 600;
+}
+
+.support-notice {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.support-notice.ok {
+  background: rgba(0, 140, 125, 0.1);
+  color: #0c5d53;
+}
+
+.support-notice.warn {
+  background: rgba(226, 149, 0, 0.12);
+  color: #7a5100;
+}
+
+.speech-actions-row {
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.speech-actions-row.compact {
+  margin-bottom: 0;
+}
+
+.speech-grid,
+.controls-grid {
+  align-items: stretch;
+}
+
+.speech-grid {
+  margin-bottom: 20px;
+}
+
+.speech-grid > *,
+.controls-grid > * {
+  flex: 1;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(18, 49, 61, 0.08);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.compact-panel {
+  min-height: 100%;
+}
+
+.panel-hint,
+.field-meta {
+  color: #5b7179;
+  font-size: 0.92rem;
+}
+
+.field-label {
+  display: block;
+  margin: 12px 0 8px;
+  color: #204855;
+  font-weight: 700;
+}
+
+textarea,
+select,
+input[type='range'] {
+  width: 100%;
+}
+
+textarea,
+select {
+  border: 1px solid rgba(18, 49, 61, 0.12);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #008c7d 0%, #16a594 100%);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0, 140, 125, 0.18);
+}
+
+button.ghost {
+  background: rgba(18, 49, 61, 0.07);
+  color: #173f4d;
+}
+
+button.secondary {
+  background: rgba(0, 140, 125, 0.12);
+  color: #0c5d53;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  color: #315561;
+}
+
+.message {
+  display: inline-flex;
+  background: rgba(18, 49, 61, 0.06);
+}
+
+.message.error {
+  background: rgba(183, 48, 69, 0.12);
+  color: #842338;
+}
+
+@media (max-width: 860px) {
+  .speech-demo-header,
+  .speech-grid,
+  .controls-grid {
+    flex-direction: column;
+  }
+
+  .speech-demo-card {
+    padding: 20px;
+  }
+}
