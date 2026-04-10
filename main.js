@@ -15,6 +15,17 @@ const actionsList = document.getElementById("actions-list");
 const warningsList = document.getElementById("warnings-list");
 const questionsList = document.getElementById("questions-list");
 
+const warningKeywords = [
+  "chest pain",
+  "shortness of breath",
+  "dizziness",
+  "fainting",
+  "fever",
+  "bleeding",
+  "swelling",
+  "worsen"
+];
+
 function setHidden(element, hidden) {
   element.classList.toggle("hidden", hidden);
 }
@@ -78,6 +89,82 @@ function renderResult(result) {
   setHidden(resultsView, false);
 }
 
+function splitSentences(text) {
+  return text
+    .split(/[\n.]+/)
+    .map((part) => part.replace(/^\s*[-*]\s*/, "").trim())
+    .filter(Boolean);
+}
+
+function buildExplanation(sentences) {
+  if (sentences.length === 0) {
+    return "These notes were turned into a simpler summary to help the patient understand the visit and next steps.";
+  }
+
+  return sentences.slice(0, 2).join(". ") + ".";
+}
+
+function buildActions(sentences) {
+  const actionHints = [
+    "take",
+    "start",
+    "continue",
+    "reduce",
+    "avoid",
+    "follow up",
+    "schedule",
+    "call",
+    "monitor",
+    "check"
+  ];
+
+  const actions = sentences.filter((sentence) =>
+    actionHints.some((hint) => sentence.toLowerCase().includes(hint))
+  );
+
+  return actions.length > 0 ? actions.slice(0, 5) : ["Follow the instructions from your doctor and ask for clarification if anything is unclear."];
+}
+
+function buildWarnings(sentences) {
+  const warnings = sentences.filter((sentence) =>
+    warningKeywords.some((hint) => sentence.toLowerCase().includes(hint))
+  );
+
+  return warnings.length > 0
+    ? warnings.slice(0, 4)
+    : ["Ask your doctor what warning signs or symptoms should prompt a call or urgent care visit."];
+}
+
+function buildQuestions(sentences) {
+  const hasMedication = sentences.some((sentence) =>
+    /(mg|medication|prescribed|tablet|capsule|daily)/i.test(sentence)
+  );
+  const hasFollowUp = sentences.some((sentence) => /follow up|week|weeks|month|months/i.test(sentence));
+
+  const questions = [
+    "Can you explain the most important thing I should focus on first?",
+    hasMedication
+      ? "What side effects or medication problems should I watch for?"
+      : "What symptoms should make me call the office?",
+    hasFollowUp
+      ? "What should I do if I am not feeling better before the follow-up visit?"
+      : "When should I check in again if symptoms do not improve?"
+  ];
+
+  return questions;
+}
+
+function mockSimplify(notes) {
+  const sentences = splitSentences(notes);
+
+  return {
+    explanation: buildExplanation(sentences),
+    actions: buildActions(sentences),
+    warnings: buildWarnings(sentences),
+    questions: buildQuestions(sentences)
+  };
+}
+
 async function handleSimplify() {
   clearError();
 
@@ -91,20 +178,8 @@ async function handleSimplify() {
   setLoading(true);
 
   try {
-    const response = await fetch("/api/simplify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ notes })
-    });
-
-    const payload = await response.json();
-
-    if (!response.ok) {
-      throw new Error(payload.error || "Something went wrong while simplifying the instructions.");
-    }
-
+    await new Promise((resolve) => window.setTimeout(resolve, 700));
+    const payload = mockSimplify(notes);
     renderResult(payload);
   } catch (error) {
     showError(error instanceof Error ? error.message : "Unable to simplify instructions right now.");
