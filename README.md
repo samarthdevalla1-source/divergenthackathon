@@ -1,40 +1,37 @@
 # AfterVisit AI
 
-A lightweight Next.js + TypeScript demo that converts doctor notes into patient-friendly after-visit instructions using the OpenAI API.
+AfterVisit AI is a simple website that turns doctor notes into patient-friendly after-visit instructions.
 
-## Local setup
+## Stack
 
-1. Install dependencies:
+- Frontend: plain `HTML`, `CSS`, and `JavaScript`
+- Backend: one `JavaScript` serverless function in `api/simplify.js`
+- Deployment: Vercel
 
-```bash
-npm install
-```
+## Environment variables
 
-2. Configure environment variables in `.env.local`:
+Create `.env.local` for local use or add these in Vercel:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-4o-mini
 ```
 
-3. Start the dev server:
+## Project structure
 
-```bash
-npm run dev
+```text
+api/
+  simplify.js
+index.html
+main.js
+styles.css
+vercel.json
 ```
 
 ## Deploy to Vercel
 
-1. Create or import a Vercel project from this repository.
-2. Set the project root directory to `aftervisit-ts-app`.
-3. Add these environment variables in Vercel:
-   - `OPENAI_API_KEY`
-   - `OPENAI_MODEL`
-4. Deploy.
-
-## Production scripts
-
-- `npm run dev`
-- `npm run build`
-- `npm run start`
-- `npm run lint`
+1. Import the GitHub repo into Vercel.
+2. Keep the root directory as the repository root.
+3. Add `OPENAI_API_KEY`.
+4. Optionally add `OPENAI_MODEL=gpt-4o-mini`.
+5. Deploy.

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AfterVisit AI</title>
+    <meta
+      name="description"
+      content="Turn confusing doctor notes into calm, patient-friendly after-visit instructions."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Healthcare AI Demo</p>
+          <h1>AfterVisit AI</h1>
+          <p class="subtitle">
+            Turn dense doctor notes into simple, patient-friendly after-visit instructions patients can
+            actually understand and follow.
+          </p>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-chip">Plain-language explanation</div>
+          <div class="hero-chip">Action checklist</div>
+          <div class="hero-chip">Warning signs</div>
+          <div class="hero-chip">Follow-up questions</div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="panel input-panel">
+          <div class="section-header">
+            <p class="section-tag">Input</p>
+            <h2>Paste doctor notes</h2>
+            <p>
+              Add the after-visit summary, medication instructions, or follow-up guidance you want rewritten
+              in plain language.
+            </p>
+          </div>
+
+          <label class="sr-only" for="doctor-notes">Doctor notes</label>
+          <textarea
+            id="doctor-notes"
+            placeholder="Example: Continue lisinopril 10mg once daily, reduce sodium intake, check blood pressure at home, and follow up in 2 weeks."
+          ></textarea>
+
+          <div class="button-row">
+            <button id="simplify-button" class="primary-button">Simplify Instructions</button>
+            <button id="example-button" class="secondary-button">Load Example</button>
+            <button id="clear-button" class="ghost-button">Clear</button>
+          </div>
+
+          <p class="notice">
+            AfterVisit AI is for communication support only. It does not diagnose, replace clinicians, or
+            create new treatment advice.
+          </p>
+
+          <div id="error-message" class="error-message hidden" role="alert"></div>
+        </section>
+
+        <section class="panel output-panel">
+          <div id="idle-state" class="state-card">
+            <p class="state-tag">Waiting for notes</p>
+            <h2>Your simplified summary will appear here</h2>
+            <p>
+              AfterVisit AI will generate a short explanation, action steps, warning signs, and helpful
+              questions for the next visit.
+            </p>
+          </div>
+
+          <div id="loading-state" class="state-card hidden">
+            <div class="spinner"></div>
+            <h2>Simplifying instructions</h2>
+            <p>Reading the notes and converting them into clear, patient-friendly guidance.</p>
+          </div>
+
+          <div id="results-view" class="hidden">
+            <div class="results-top">
+              <div>
+                <p class="section-tag accent-tag">Output</p>
+                <h2>Simplified patient instructions</h2>
+              </div>
+              <button id="copy-button" class="secondary-button">Copy Summary</button>
+            </div>
+
+            <article class="result-card">
+              <p class="result-label">Explanation</p>
+              <h3>What this means</h3>
+              <p id="explanation-text"></p>
+            </article>
+
+            <article class="result-card">
+              <p class="result-label">Actions</p>
+              <h3>What the patient should do</h3>
+              <ul id="actions-list" class="bullet-list"></ul>
+            </article>
+
+            <article class="result-card">
+              <p class="result-label">Warnings</p>
+              <h3>What to watch for</h3>
+              <ul id="warnings-list" class="bullet-list"></ul>
+            </article>
+
+            <article class="result-card">
+              <p class="result-label">Questions</p>
+              <h3>Helpful follow-up questions</h3>
+              <ul id="questions-list" class="bullet-list"></ul>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+  </html>
