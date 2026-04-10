@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AfterVisit AI | Transcribe</title>
+    <meta
+      name="description"
+      content="Transcribe speech to text in the browser and summarize the transcript with AfterVisit AI mock logic."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav class="site-nav">
+        <a class="brandmark" href="index.html">AfterVisit AI</a>
+        <div class="nav-links">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="simplify.html">Simplify</a>
+          <a class="nav-link current" href="transcribe.html">Transcribe</a>
+          <a class="nav-link" href="about.html">About</a>
+        </div>
+      </nav>
+
+      <header class="hero compact-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Speech To Text Demo</p>
+          <h1>Talk through the visit notes.</h1>
+          <p class="subtitle">
+            Use the browser microphone when available, or load one of the built-in test transcripts below and
+            send it through the same mock AI simplifier.
+          </p>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-chip">Browser microphone</div>
+          <div class="hero-chip">5 test transcripts</div>
+          <div class="hero-chip">Mock AI summary</div>
+          <div class="hero-chip">Read transcript summary aloud</div>
+        </div>
+      </header>
+
+      <main class="stack-layout">
+        <section class="panel">
+          <div class="section-header">
+            <p class="section-tag">Record</p>
+            <h2>Transcribe spoken notes</h2>
+            <p id="transcription-status">Microphone ready. You can speak or load a test case.</p>
+          </div>
+
+          <div class="button-row">
+            <button id="start-recording" class="primary-button">Start Recording</button>
+            <button id="stop-recording" class="secondary-button" disabled>Stop Recording</button>
+            <button id="summarize-transcript" class="secondary-button">Summarize Transcript</button>
+            <button id="clear-transcript" class="ghost-button">Clear</button>
+          </div>
+
+          <label class="sr-only" for="transcript-text">Transcript</label>
+          <textarea
+            id="transcript-text"
+            placeholder="Your transcript will appear here, or choose one of the voice test cases below."
+          ></textarea>
+
+          <div id="transcript-error" class="error-message hidden" role="alert"></div>
+        </section>
+
+        <section class="panel">
+          <div id="transcript-idle-state" class="state-card">
+            <p class="state-tag">Waiting for transcript</p>
+            <h2>Your transcript summary will appear here</h2>
+            <p>Record, paste, or load a transcript above to generate the simplified mock AI summary.</p>
+          </div>
+
+          <div id="transcript-loading-state" class="state-card hidden">
+            <div class="spinner"></div>
+            <h2>Summarizing transcript</h2>
+            <p>Reading the spoken notes and converting them into clear, patient-friendly guidance.</p>
+          </div>
+
+          <div id="transcript-results-view" class="hidden">
+            <div class="results-top">
+              <div>
+                <p class="section-tag accent-tag">Output</p>
+                <h2>Simplified transcript summary</h2>
+              </div>
+              <div class="button-row inline-actions">
+                <button id="transcript-copy-button" class="secondary-button">Copy Summary</button>
+                <button id="transcript-speak-button" class="secondary-button">Read Summary</button>
+                <button id="transcript-stop-speak-button" class="ghost-button">Stop Reading</button>
+              </div>
+            </div>
+
+            <article class="result-card">
+              <p class="result-label">Explanation</p>
+              <h3>What this means</h3>
+              <p id="transcript-explanation-text"></p>
+            </article>
+
+            <article class="result-card">
+              <p class="result-label">Actions</p>
+              <h3>What the patient should do</h3>
+              <ul id="transcript-actions-list" class="bullet-list"></ul>
+            </article>
+
+            <article class="result-card">
+              <p class="result-label">Warnings</p>
+              <h3>What to watch for</h3>
+              <ul id="transcript-warnings-list" class="bullet-list"></ul>
+            </article>
+
+            <article class="result-card">
+              <p class="result-label">Questions</p>
+              <h3>Helpful follow-up questions</h3>
+              <ul id="transcript-questions-list" class="bullet-list"></ul>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="mock-ai.js"></script>
+    <script src="transcribe.js"></script>
+  </body>
+</html>

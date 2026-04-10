@@ -12,8 +12,13 @@ AfterVisit AI is a simple website that turns doctor notes into patient-friendly 
 
 ```text
 index.html
+about.html
+mock-ai.js
 main.js
+simplify.html
 styles.css
+transcribe.html
+transcribe.js
 ```
 
 ## Run locally

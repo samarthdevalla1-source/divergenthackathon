@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AfterVisit AI</title>
+    <title>AfterVisit AI | Home</title>
     <meta
       name="description"
-      content="Turn confusing doctor notes into calm, patient-friendly after-visit instructions."
+      content="AfterVisit AI helps patients understand doctor instructions through plain-language summaries, transcription, and mock voice support."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,107 +18,73 @@
   </head>
   <body>
     <div class="page-shell">
-      <header class="hero">
+      <nav class="site-nav">
+        <a class="brandmark" href="index.html">AfterVisit AI</a>
+        <div class="nav-links">
+          <a class="nav-link current" href="index.html">Home</a>
+          <a class="nav-link" href="simplify.html">Simplify</a>
+          <a class="nav-link" href="transcribe.html">Transcribe</a>
+          <a class="nav-link" href="about.html">About</a>
+        </div>
+      </nav>
+
+      <header class="hero hero-home">
         <div class="hero-copy">
-          <p class="eyebrow">Healthcare AI Demo</p>
-          <h1>AfterVisit AI</h1>
+          <p class="eyebrow">Healthcare communication made clearer</p>
+          <h1>AfterVisit AI turns rushed instructions into calm next steps.</h1>
           <p class="subtitle">
-            Turn dense doctor notes into simple, patient-friendly after-visit instructions patients can
-            actually understand and follow.
+            Explore a lightweight patient communication website with a mock AI summary tool, a speech-to-text
+            demo, and built-in text-to-speech for easier follow-through after a visit.
           </p>
+          <div class="button-row hero-actions">
+            <a class="primary-button link-button" href="simplify.html">Open Simplifier</a>
+            <a class="secondary-button link-button" href="transcribe.html">Try Voice Transcription</a>
+          </div>
         </div>
 
         <div class="hero-grid">
           <div class="hero-chip">Plain-language explanation</div>
           <div class="hero-chip">Action checklist</div>
-          <div class="hero-chip">Warning signs</div>
-          <div class="hero-chip">Follow-up questions</div>
+          <div class="hero-chip">Voice transcription</div>
+          <div class="hero-chip">Text-to-speech playback</div>
         </div>
       </header>
 
-      <main class="workspace">
-        <section class="panel input-panel">
-          <div class="section-header">
-            <p class="section-tag">Input</p>
-            <h2>Paste doctor notes</h2>
-            <p>
-              Add the after-visit summary, medication instructions, or follow-up guidance you want rewritten
-              in plain language.
-            </p>
+      <main class="stack-layout">
+        <section class="panel feature-strip">
+          <div class="feature-card">
+            <p class="section-tag">Simplify</p>
+            <h2>Rewrite complex notes</h2>
+            <p>Paste after-visit notes and get explanation, actions, warnings, and questions in one scanable summary.</p>
           </div>
-
-          <label class="sr-only" for="doctor-notes">Doctor notes</label>
-          <textarea
-            id="doctor-notes"
-            placeholder="Example: Continue lisinopril 10mg once daily, reduce sodium intake, check blood pressure at home, and follow up in 2 weeks."
-          ></textarea>
-
-          <div class="button-row">
-            <button id="simplify-button" class="primary-button">Simplify Instructions</button>
-            <button id="clear-button" class="ghost-button">Clear</button>
+          <div class="feature-card">
+            <p class="section-tag">Transcribe</p>
+            <h2>Capture spoken follow-up</h2>
+            <p>Use the browser microphone or test transcripts to simulate voice capture and summary generation.</p>
           </div>
-
-          <p class="notice">
-            AfterVisit AI is for communication support only. It does not diagnose, replace clinicians, or
-            create new treatment advice.
-          </p>
-
-          <div id="error-message" class="error-message hidden" role="alert"></div>
+          <div class="feature-card">
+            <p class="section-tag">Read Aloud</p>
+            <h2>Support accessibility</h2>
+            <p>Play the simplified summary back with text-to-speech so instructions are easier to review and remember.</p>
+          </div>
         </section>
 
-        <section class="panel output-panel">
-          <div id="idle-state" class="state-card">
-            <p class="state-tag">Waiting for notes</p>
-            <h2>Your simplified summary will appear here</h2>
-            <p>
-              AfterVisit AI will generate a short explanation, action steps, warning signs, and helpful
-              questions for the next visit.
+        <section class="panel two-up">
+          <div>
+            <p class="section-tag">How it works</p>
+            <h2>Built for fast demos and clearer patient communication.</h2>
+            <p class="body-copy">
+              This version uses a mock AI engine in the browser so you can demo the core experience without
+              server setup, keys, or backend infrastructure.
             </p>
           </div>
-
-          <div id="loading-state" class="state-card hidden">
-            <div class="spinner"></div>
-            <h2>Simplifying instructions</h2>
-            <p>Reading the notes and converting them into clear, patient-friendly guidance.</p>
-          </div>
-
-          <div id="results-view" class="hidden">
-            <div class="results-top">
-              <div>
-                <p class="section-tag accent-tag">Output</p>
-                <h2>Simplified patient instructions</h2>
-              </div>
-              <button id="copy-button" class="secondary-button">Copy Summary</button>
-            </div>
-
-            <article class="result-card">
-              <p class="result-label">Explanation</p>
-              <h3>What this means</h3>
-              <p id="explanation-text"></p>
-            </article>
-
-            <article class="result-card">
-              <p class="result-label">Actions</p>
-              <h3>What the patient should do</h3>
-              <ul id="actions-list" class="bullet-list"></ul>
-            </article>
-
-            <article class="result-card">
-              <p class="result-label">Warnings</p>
-              <h3>What to watch for</h3>
-              <ul id="warnings-list" class="bullet-list"></ul>
-            </article>
-
-            <article class="result-card">
-              <p class="result-label">Questions</p>
-              <h3>Helpful follow-up questions</h3>
-              <ul id="questions-list" class="bullet-list"></ul>
-            </article>
+          <div class="checklist-card">
+            <div class="check-row">1. Capture doctor notes as text or speech.</div>
+            <div class="check-row">2. Convert them into plain-language next steps.</div>
+            <div class="check-row">3. Read the summary aloud or copy it for follow-up.</div>
           </div>
         </section>
       </main>
     </div>
-
-    <script src="main.js"></script>
   </body>
-  </html>
+</html>
