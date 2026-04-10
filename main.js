@@ -3,7 +3,6 @@ const exampleNotes =
 
 const notesField = document.getElementById("doctor-notes");
 const simplifyButton = document.getElementById("simplify-button");
-const exampleButton = document.getElementById("example-button");
 const clearButton = document.getElementById("clear-button");
 const copyButton = document.getElementById("copy-button");
 const errorMessage = document.getElementById("error-message");
@@ -211,11 +210,6 @@ async function handleCopy() {
     }, 1600);
   }
 }
-
-exampleButton.addEventListener("click", () => {
-  notesField.value = exampleNotes;
-  clearError();
-});
 
 clearButton.addEventListener("click", () => {
   notesField.value = "";
