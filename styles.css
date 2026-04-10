@@ -1,14 +1,14 @@
 :root {
   color-scheme: light;
-  --ink: #102033;
-  --muted: #607085;
-  --line: rgba(16, 32, 51, 0.1);
-  --sky: #e8f4ff;
-  --mint: #e8f9ee;
-  --peach: #fff2e6;
-  --surface: rgba(255, 255, 255, 0.78);
+  --ink: #1d1230;
+  --muted: #6f658d;
+  --line: rgba(93, 56, 143, 0.18);
+  --sky: rgba(209, 195, 255, 0.28);
+  --mint: rgba(211, 193, 255, 0.18);
+  --peach: rgba(255, 236, 250, 0.5);
+  --surface: rgba(255, 255, 255, 0.24);
   --white: #ffffff;
-  --shadow: 0 20px 50px rgba(16, 32, 51, 0.1);
+  --shadow: 0 28px 60px rgba(73, 35, 120, 0.18);
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
@@ -28,9 +28,10 @@ body {
   font-family: "Manrope", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 0% 0%, rgba(135, 206, 250, 0.24), transparent 28%),
-    radial-gradient(circle at 100% 10%, rgba(154, 230, 180, 0.22), transparent 24%),
-    linear-gradient(180deg, #f8fbff 0%, #eef5ff 50%, #ffffff 100%);
+    radial-gradient(circle at 0% 0%, rgba(167, 123, 255, 0.38), transparent 28%),
+    radial-gradient(circle at 100% 10%, rgba(236, 72, 153, 0.18), transparent 26%),
+    radial-gradient(circle at 55% 100%, rgba(129, 140, 248, 0.26), transparent 30%),
+    linear-gradient(180deg, #faf6ff 0%, #eee6ff 46%, #f8f2ff 100%);
 }
 
 body::before {
@@ -39,8 +40,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(16, 32, 51, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 32, 51, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(108, 72, 160, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 72, 160, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
   opacity: 0.45;
 }
@@ -59,9 +60,12 @@ body::before {
 .state-card,
 .feature-card,
 .checklist-card {
-  backdrop-filter: blur(18px);
-  background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0.16)),
+    rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.42);
   box-shadow: var(--shadow);
 }
 
@@ -90,7 +94,7 @@ body::before {
 
 .nav-link {
   text-decoration: none;
-  color: #4a5e74;
+  color: #64558a;
   padding: 10px 14px;
   border-radius: 999px;
   font-weight: 600;
@@ -98,8 +102,8 @@ body::before {
 
 .nav-link.current,
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(244, 232, 255, 0.42));
+  color: #291642;
 }
 
 .hero {
@@ -136,9 +140,9 @@ body::before {
 .section-tag {
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(94, 152, 201, 0.2);
-  color: #2a6898;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(180, 139, 255, 0.3);
+  color: #7047bf;
 }
 
 .hero h1 {
@@ -176,8 +180,8 @@ body::before {
 .case-card {
   padding: 16px 18px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.46), rgba(240, 228, 255, 0.22));
+  border: 1px solid rgba(255, 255, 255, 0.45);
   font-size: 0.96rem;
   color: var(--ink);
 }
@@ -238,9 +242,9 @@ textarea {
   min-height: 320px;
   margin-top: 18px;
   padding: 20px;
-  border: 1px solid #d4dde7;
+  border: 1px solid rgba(154, 112, 222, 0.28);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--ink);
   font: inherit;
   font-size: 1rem;
@@ -251,8 +255,8 @@ textarea {
 }
 
 textarea:focus {
-  border-color: #76b7f4;
-  box-shadow: 0 0 0 5px rgba(118, 183, 244, 0.16);
+  border-color: #9b6cff;
+  box-shadow: 0 0 0 5px rgba(155, 108, 255, 0.16);
 }
 
 .button-row {
@@ -298,19 +302,20 @@ button:disabled {
 }
 
 .primary-button {
-  background: var(--ink);
+  background: linear-gradient(135deg, #5a22b8, #7c3aed 55%, #a855f7);
   color: var(--white);
+  box-shadow: 0 16px 32px rgba(108, 43, 191, 0.28);
 }
 
 .secondary-button {
-  background: var(--white);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(244, 232, 255, 0.34));
   color: var(--ink);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(173, 141, 255, 0.22);
 }
 
 .ghost-button {
-  background: #edf2f7;
-  color: #4c5d70;
+  background: linear-gradient(135deg, rgba(237, 228, 255, 0.64), rgba(255, 255, 255, 0.26));
+  color: #5f4f86;
 }
 
 .notice,
@@ -323,14 +328,14 @@ button:disabled {
 }
 
 .notice {
-  background: var(--peach);
-  border: 1px solid rgba(242, 176, 106, 0.2);
+  background: linear-gradient(135deg, rgba(255, 232, 250, 0.64), rgba(255, 243, 230, 0.34));
+  border: 1px solid rgba(227, 163, 255, 0.24);
 }
 
 .error-message {
   color: #b42318;
-  background: #fff0ef;
-  border: 1px solid rgba(228, 77, 46, 0.2);
+  background: linear-gradient(135deg, rgba(255, 238, 245, 0.72), rgba(255, 245, 245, 0.42));
+  border: 1px solid rgba(228, 77, 46, 0.18);
 }
 
 .state-card {
@@ -352,8 +357,8 @@ button:disabled {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 4px solid rgba(118, 183, 244, 0.28);
-  border-top-color: #2a82d5;
+  border: 4px solid rgba(184, 157, 255, 0.32);
+  border-top-color: #7c3aed;
   animation: spin 0.8s linear infinite;
 }
 
@@ -364,12 +369,12 @@ button:disabled {
   gap: 16px;
   padding: 18px;
   border-radius: var(--radius-lg);
-  background: var(--sky);
-  border: 1px solid rgba(118, 183, 244, 0.16);
+  background: linear-gradient(135deg, rgba(223, 212, 255, 0.42), rgba(255, 255, 255, 0.22));
+  border: 1px solid rgba(173, 141, 255, 0.18);
 }
 
 .accent-tag {
-  color: #246ea3;
+  color: #6d40c9;
 }
 
 #results-view,
@@ -385,7 +390,7 @@ button:disabled {
 
 .result-label {
   margin: 0 0 10px;
-  color: #6f8092;
+  color: #7a6d9d;
 }
 
 .bullet-list {
@@ -413,7 +418,7 @@ button:disabled {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #2a82d5;
+  background: linear-gradient(135deg, #7c3aed, #c084fc);
 }
 
 .test-case-grid {
